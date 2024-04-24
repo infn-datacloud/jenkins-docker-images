@@ -27,13 +27,11 @@ pipeline {
                 script {
                     docker.withRegistry('https://harbor.cloud.infn.it', HARBOR_CREDENTIALS) {
                         docker.build("${GO_IMAGE_NAME}:${env.SANITIZED_BRANCH_NAME}", "-f golang/Dockerfile fpm").push()
-                    }
-
-                    
+                    }   
                 }
             }
         }
-    
+    }
     post {
         success {
             echo 'Docker images build and push successful!'
